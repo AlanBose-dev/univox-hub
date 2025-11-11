@@ -12,17 +12,9 @@ import ConcernCard from "@/components/ConcernCard";
 import { useToast } from "@/hooks/use-toast";
 import { LogOut, MessageSquare, BarChart3 } from "lucide-react";
 import type { User } from "@supabase/supabase-js";
+import type { Database } from "@/integrations/supabase/types";
 
-interface Concern {
-  id: string;
-  title: string;
-  description: string;
-  category: string;
-  urgency: string;
-  status: "pending" | "under_review" | "resolved";
-  created_at: string;
-  is_anonymous: boolean;
-}
+type Concern = Database["public"]["Tables"]["concerns"]["Row"];
 
 const AdminDashboard = () => {
   const [user, setUser] = useState<User | null>(null);
@@ -261,8 +253,7 @@ const AdminDashboard = () => {
                 {concerns.map((concern) => (
                   <ConcernCard
                     key={concern.id}
-                    {...concern}
-                    createdAt={concern.created_at}
+                    concern={concern}
                     onClick={() => setSelectedConcern(concern)}
                   />
                 ))}
@@ -271,8 +262,7 @@ const AdminDashboard = () => {
                 {filterConcerns("pending").map((concern) => (
                   <ConcernCard
                     key={concern.id}
-                    {...concern}
-                    createdAt={concern.created_at}
+                    concern={concern}
                     onClick={() => setSelectedConcern(concern)}
                   />
                 ))}
@@ -281,8 +271,7 @@ const AdminDashboard = () => {
                 {filterConcerns("under_review").map((concern) => (
                   <ConcernCard
                     key={concern.id}
-                    {...concern}
-                    createdAt={concern.created_at}
+                    concern={concern}
                     onClick={() => setSelectedConcern(concern)}
                   />
                 ))}
@@ -291,8 +280,7 @@ const AdminDashboard = () => {
                 {filterConcerns("resolved").map((concern) => (
                   <ConcernCard
                     key={concern.id}
-                    {...concern}
-                    createdAt={concern.created_at}
+                    concern={concern}
                     onClick={() => setSelectedConcern(concern)}
                   />
                 ))}
