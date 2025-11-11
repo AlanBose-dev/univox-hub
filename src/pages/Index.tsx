@@ -105,8 +105,16 @@ const Index = () => {
       </main>
 
       <footer className="border-t mt-16 py-8">
-        <div className="container mx-auto px-4 text-center text-muted-foreground">
+        <div className="container mx-auto px-4 text-center text-muted-foreground space-y-2">
           <p>&copy; 2025 CampusVoice. Making institutions better, one voice at a time.</p>
+          <Button 
+            variant="link" 
+            className="text-muted-foreground hover:text-primary"
+            onClick={() => navigate("/admin/login")}
+          >
+            <Shield className="w-4 h-4 mr-2" />
+            Admin Access
+          </Button>
         </div>
       </footer>
     </div>
